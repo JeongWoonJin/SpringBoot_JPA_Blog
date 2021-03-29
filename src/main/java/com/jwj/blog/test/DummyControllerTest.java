@@ -65,11 +65,11 @@ public class DummyControllerTest {
 	}
 	
 	@GetMapping("/dummy/user")
-	public List<User> pageList(@PageableDefault(size = 1, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
+	public Page<User> pageList(@PageableDefault(size = 1, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
 		Page<User> pagingUser = userRepsitory.findAll(pageable);
 		
 		List<User> users = pagingUser.getContent();
-		return users;
+		return pagingUser;
 	}
 	
 	@GetMapping("/dummy/user/{id}")
