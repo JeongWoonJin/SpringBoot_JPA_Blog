@@ -42,4 +42,16 @@ public class BoardService {
 	public void 글삭제(int id) {
 		boardRepository.deleteById(id);
 	}
+	
+	@Transactional
+	public void 글수정(int id, Board  requestBoard) {
+		Board board = boardRepository.findById(id)
+				.orElseThrow(()->{
+					return new IllegalArgumentException("글 찾기 실패 : 아이디를 찾을 수 없습니다.");
+				});
+		board.setTitle(requestBoard.getTitle());
+		board.setContent(requestBoard.getContent());
+		System.out.println(board.getTitle());
+		System.out.println(board.getContent());
+	}
 }
